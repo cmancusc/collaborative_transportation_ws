@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libcvxgen_solver.so -o ../devel/lib/libcvxgen_solver.so CMakeFiles/cvxgen_solver.dir/lib/ldl.c.o CMakeFiles/cvxgen_solver.dir/lib/solver.c.o CMakeFiles/cvxgen_solver.dir/lib/matrix_support.c.o CMakeFiles/cvxgen_solver.dir/lib/util.c.o CMakeFiles/cvxgen_solver.dir/lib/variables_definition.c.o 

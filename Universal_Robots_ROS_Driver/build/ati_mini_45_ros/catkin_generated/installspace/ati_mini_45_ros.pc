@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: ati_mini_45_ros
+Description: Description of ati_mini_45_ros
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

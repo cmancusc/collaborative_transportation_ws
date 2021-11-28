@@ -1,0 +1,8 @@
+prefix=/home/federico/benzi_ws/src/build/devel
+
+Name: kdl_parser_py
+Description: Description of kdl_parser_py
+Version: 1.13.2
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: urdfdom_py

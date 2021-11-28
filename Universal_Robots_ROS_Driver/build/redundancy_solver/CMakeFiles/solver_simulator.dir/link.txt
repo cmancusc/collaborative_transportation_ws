@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libsolver_simulator.so -o ../devel/lib/libsolver_simulator.so CMakeFiles/solver_simulator.dir/src/solver_simulator.cpp.o -Wl,-rpath,/home/federico/benzi_ws/src/build/devel/lib ../devel/lib/libcvxgen_solver.so 

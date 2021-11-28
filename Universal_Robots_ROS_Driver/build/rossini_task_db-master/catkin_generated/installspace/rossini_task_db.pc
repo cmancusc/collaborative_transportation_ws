@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: rossini_task_db
+Description: Description of rossini_task_db
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs message_runtime

@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: kdl_parser
+Description: Description of kdl_parser
+Version: 1.13.2
+Cflags: -I${prefix}/include -I/opt/ros/melodic/share/orocos_kdl/cmake/../../../include -I/usr/include/eigen3 -I/usr/include
+Libs: -L${prefix}/lib -lkdl_parser /opt/ros/melodic/lib/liborocos-kdl.so.1.4.0 /usr/lib/x86_64-linux-gnu/libtinyxml.so /usr/lib/x86_64-linux-gnu/libtinyxml2.so
+Requires: rosconsole urdf

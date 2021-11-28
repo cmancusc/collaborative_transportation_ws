@@ -1,0 +1,8 @@
+prefix=/home/federico/benzi_ws/src/build/devel
+
+Name: tanks_iso
+Description: Description of tanks_iso
+Version: 0.0.0
+Cflags: -I/home/federico/benzi_ws/src/tanks_iso/include
+Libs: -L${prefix}/lib -ltanks_iso
+Requires: roscpp rospy std_msgs

@@ -1,0 +1,8 @@
+prefix=/home/federico/benzi_ws/src/build/devel
+
+Name: null_damping
+Description: Description of null_damping
+Version: 0.0.0
+Cflags: -I/home/federico/benzi_ws/src/null_damping/include -I/home/federico/benzi_ws/src/null_damping/lib
+Libs: -L${prefix}/lib -lnull_damping -lcvxgen_null
+Requires: 

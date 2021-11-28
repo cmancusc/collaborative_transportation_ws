@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -g  -shared -Wl,-soname,liblibreria.so -o ../devel/lib/liblibreria.so CMakeFiles/libreria.dir/cvxgen/ldl.c.o CMakeFiles/libreria.dir/cvxgen/solver.c.o CMakeFiles/libreria.dir/cvxgen/matrix_support.c.o CMakeFiles/libreria.dir/cvxgen/util.c.o CMakeFiles/libreria.dir/cvxgen/variables_definition.c.o 

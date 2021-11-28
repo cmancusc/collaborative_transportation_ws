@@ -1,0 +1,38 @@
+# Produced by CVXGEN, 2021-05-13 12:21:53 -0400.
+# CVXGEN is Copyright (C) 2006-2017 Jacob Mattingley, jem@cvxgen.com.
+# The code in this file is Copyright (C) 2006-2017 Jacob Mattingley.
+# CVXGEN, or solvers produced by CVXGEN, cannot be used for commercial
+# applications without prior written permission from Jacob Mattingley.
+
+# Filename: description.cvxgen.
+# Description: A description of the CVXGEN problem.
+
+dimensions
+  n = 6
+  m = 8
+end
+
+parameters
+  Jacob (n,m)
+  Jacob_limit (n,m)
+  adm_qdot (m)
+  opt_qdot_prev (m)
+  a_max(m)
+  A (n)
+  B
+  l nonnegative
+  P(n,n) diagonal
+end
+
+variables
+  opt_qdot (m)
+  delta(n)
+end
+
+minimize
+  quad(opt_qdot - adm_qdot) + l*quad(delta)
+subject to
+  P * Jacob_limit * opt_qdot == delta
+  A' * Jacob * opt_qdot <= B
+  -a_max <= opt_qdot - opt_qdot_prev <= a_max
+end

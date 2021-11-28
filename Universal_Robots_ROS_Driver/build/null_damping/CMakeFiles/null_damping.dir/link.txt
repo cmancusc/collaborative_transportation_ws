@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libnull_damping.so -o ../devel/lib/libnull_damping.so CMakeFiles/null_damping.dir/src/null_damping.cpp.o -Wl,-rpath,/home/federico/benzi_ws/src/build/devel/lib ../devel/lib/libcvxgen_null.so 

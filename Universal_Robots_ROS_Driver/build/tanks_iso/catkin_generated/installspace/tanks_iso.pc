@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: tanks_iso
+Description: Description of tanks_iso
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -ltanks_iso
+Requires: roscpp rospy std_msgs

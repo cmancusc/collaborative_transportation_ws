@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -g  -shared -Wl,-soname,libcvxgen_null.so -o ../devel/lib/libcvxgen_null.so CMakeFiles/cvxgen_null.dir/lib/ldl.c.o CMakeFiles/cvxgen_null.dir/lib/solver.c.o CMakeFiles/cvxgen_null.dir/lib/matrix_support.c.o CMakeFiles/cvxgen_null.dir/lib/util.c.o CMakeFiles/cvxgen_null.dir/lib/variables_definition.c.o 

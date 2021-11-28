@@ -1,0 +1,8 @@
+prefix=/home/federico/benzi_ws/src/build/devel
+
+Name: xmlrpc_wrapper
+Description: Description of xmlrpc_wrapper
+Version: 0.0.0
+Cflags: -I/home/federico/benzi_ws/src/build/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

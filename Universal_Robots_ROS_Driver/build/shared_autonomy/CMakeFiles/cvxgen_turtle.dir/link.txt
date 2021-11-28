@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -g  -shared -Wl,-soname,libcvxgen_turtle.so -o ../devel/lib/libcvxgen_turtle.so CMakeFiles/cvxgen_turtle.dir/lib/ldl.c.o CMakeFiles/cvxgen_turtle.dir/lib/solver.c.o CMakeFiles/cvxgen_turtle.dir/lib/matrix_support.c.o CMakeFiles/cvxgen_turtle.dir/lib/util.c.o CMakeFiles/cvxgen_turtle.dir/lib/variables_definition.c.o 

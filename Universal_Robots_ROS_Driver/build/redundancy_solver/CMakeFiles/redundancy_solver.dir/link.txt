@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libredundancy_solver.so -o ../devel/lib/libredundancy_solver.so CMakeFiles/redundancy_solver.dir/src/redundancy_solver.cpp.o -Wl,-rpath,/home/federico/benzi_ws/src/build/devel/lib ../devel/lib/libcvxgen_solver.so 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libtanks_iso.so -o ../devel/lib/libtanks_iso.so CMakeFiles/tanks_iso.dir/src/tanks_iso.cpp.o -Wl,-rpath,/home/federico/benzi_ws/src/build/devel/lib ../devel/lib/libcvxgen_solver.so 

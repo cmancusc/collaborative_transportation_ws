@@ -1,0 +1,8 @@
+prefix=/home/federico/benzi_ws/src/build/devel
+
+Name: shared_autonomy
+Description: Description of shared_autonomy
+Version: 0.0.0
+Cflags: -I/home/federico/benzi_ws/src/shared_autonomy/include -I/home/federico/benzi_ws/src/shared_autonomy/lib
+Libs: -L${prefix}/lib -lturtle_control -lcvxgen_turtle
+Requires: 

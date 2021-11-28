@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- Robot pose -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0.0"/>
+  <arg name="prefix"    value="mobile_" />
+
+  <remap from="mobile_base_controller/cmd_vel" to="cmd_vel" />
+  <remap from="mobile_base_controller/odom"    to="odom_comb" />
+
+  <remap from="/arm_controller/command"                           to="/ur10e/manipulator_joint_trajectory_controller/command"/>
+  <remap from="/arm_controller/follow_joint_trajectory/cancel"    to="/ur10e/manipulator_joint_trajectory_controller/follow_joint_trajectory/cancel"/>
+  <remap from="/arm_controller/follow_joint_trajectory/feedback"  to="/ur10e/manipulator_joint_trajectory_controller/follow_joint_trajectory/feedback"/>
+  <remap from="/arm_controller/follow_joint_trajectory/goal"      to="/ur10e/manipulator_joint_trajectory_controller/follow_joint_trajectory/goal"/>
+  <remap from="/arm_controller/follow_joint_trajectory/result"    to="/ur10e/manipulator_joint_trajectory_controller/follow_joint_trajectory/result"/>
+  <remap from="/arm_controller/follow_joint_trajectory/status"    to="/ur10e/manipulator_joint_trajectory_controller/follow_joint_trajectory/status"/>
+  <remap from="/arm_controller/state"                             to="/ur10e/manipulator_joint_trajectory_controller/state"/>
+  
+<!---=================================================================================================================================================================-->
+
+  <!--Gazebo Variables--> 
+  <arg name="world" default="empty"/> 
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="world_name_global" default="worlds/empty.world"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name_global)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+<!---=================================================================================================================================================================-->
+
+  <!--Robot description to param server-->
+  <param name="robot_description" command="xacro --inorder '$(find mobile_robot)/robots/mobile_robot.urdf.xacro'" />
+  <node name="mobile_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+  args="-urdf -param robot_description -model mobile_robot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+  
+<!---=================================================================================================================================================================-->
+ 
+  <!-- load the controller_utils -->
+  <include file="$(find mobile_robot)/robots/config/controller/launch/controller_utils.launch"/>
+
+ <!---=================================================================================================================================================================-->
+  
+	<!-- ur10 controller + pid gains + gazebo_ros pid gains -->
+	<rosparam file="$(find mobile_robot)/robots/config/controller/arm_controller_ur10e.yaml" command="load"/>
+	<node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/> 
+
+  <!--load the jointGroupPositionController contained in the above loaded 'arm_controller_ur10e.yaml'
+	<node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" args="load joint_group_position_controller" respawn="false" output="screen" />
+  -->
+   
+<!---=================================================================================================================================================================-->
+ 
+  <!-- load the differential drive controller for the mir100 -->
+  <rosparam file="$(find mobile_robot)/robots/config/controller/diffdrive_controller.yaml" command="load" subst_value="true" />
+  <node name="mobile_base_controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="mobile_base_controller"/>
+
+  <!-- EKF 
+  <include file="$(find mobile_robot)/robots/config/controller/launch/ekf.launch.xml"/>
+  -->
+  
+  <!-- Load teleop
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="cmd_vel"/>
+    <param name="default_vx_max" value="1.0" />
+    <param name="default_vx_min" value="-1.0" />
+    <param name="default_vw_max" value="1.5" />
+    <param name="default_vw_min" value="-1.5" />
+  </node>
+   -->
+<!---=================================================================================================================================================================-->
+ 
+   <!-- create combined scan topic (like on real MiR) --> 
+  <node pkg="topic_tools" type="relay" name="b_scan_relay" args="b_scan scan"/>
+  <node pkg="topic_tools" type="relay" name="f_scan_relay" args="f_scan scan"/>
+
+  <node name="b_rep117_laser_filter" pkg="mir_driver" type="rep117_filter.py" output="screen">
+    <remap from="scan" to="b_scan" />
+    <remap from="scan_filtered" to="b_scan_rep117" />
+  </node>
+
+  <node name="f_rep117_laser_filter" pkg="mir_driver" type="rep117_filter.py" output="screen">
+    <remap from="scan" to="f_scan" />
+    <remap from="scan_filtered" to="f_scan_rep117" />
+  </node>
+
+  <!--
+  <node pkg="amcl" type="amcl" name="amcl" output="screen" >
+    <param name="use_map_topic"             value="true"/>
+    <param name="odom_frame_id"             value="mobile_odom_comb"/>
+    <param name="base_frame_id"             value="mobile_base_footprint"/>
+    <param name="global_frame_id"           value="/map"/>
+  </node>-->
+
+  <!--To publish Joint and Robot state 
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">-->
+    <!--<param name="use_gui" value="TRUE"/>-->
+<!--  </node>
+-->
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+	  <param name="publish_frequency" value="20.0"/>
+  </node>
+
+<!---=================================================================================================================================================================-->
+<!--
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mobile_robot)/robots/config/basic_config.rviz"/>
+-->
+<!---=================================================================================================================================================================-->
+  
+  <!-- load the the srdf, joint_limits.yaml, kinematics.yaml -->
+  <include file="$(find mobile_robot)/robots/config/launch/planning_context.launch"/>
+
+ <!---=================================================================================================================================================================-->
+  
+  <arg name="ADMITTANCE_PARAMS_FILE" default="$(find mobile_robot)/robots/config/admittance_parameters.yaml" />
+  <rosparam file="$(arg ADMITTANCE_PARAMS_FILE)" command="load"/>
+
+ <!---=================================================================================================================================================================-->
+
+  <!--<node respawn="true" pkg="joy"
+        type="joy_node" name="turtle_joy" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.3" />
+  </node>-->
+
+</launch>

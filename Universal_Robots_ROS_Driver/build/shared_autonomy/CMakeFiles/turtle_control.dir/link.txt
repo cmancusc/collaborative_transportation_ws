@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libturtle_control.so -o ../devel/lib/libturtle_control.so CMakeFiles/turtle_control.dir/src/turtle_control.cpp.o -Wl,-rpath,/home/federico/benzi_ws/src/build/devel/lib ../devel/lib/libcvxgen_turtle.so 

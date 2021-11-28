@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+
+ <!---=================================================================================================================================================================-->
+
+  <rosparam file="$(find mobile_robot)/robots/config/admittance_parameters.yaml" command="load"/>
+
+ <!---=================================================================================================================================================================-->
+  <include file="$(find ur10e_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+</launch>

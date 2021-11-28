@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<robot name="mobile_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--ur10--> -->
+  <xacro:include filename="$(find mobile_robot)/robots/urdf/xacros/common.gazebo.xacro" />
+
+  <!--ur10 -->
+  <xacro:include filename="$(find mobile_robot)/robots/urdf/ur10e.urdf.xacro" />
+
+  <!-- mir100 --> 
+  <xacro:include filename="$(find mobile_robot)/robots/urdf/mir.urdf.xacro" />
+
+  
+  <xacro:mir_100 prefix="mobile_" />
+
+  <!--ur10-->
+  <xacro:ur10e_robot parent="mobile_base_link" prefix="ur10e_" joint_limited="true"
+    shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
+    shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
+    elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
+    wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
+    wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
+    wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
+    safety_limits= "false" safety_pos_margin= "0.15"
+    safety_k_position="20">
+
+  </xacro:ur10e_robot>
+ 
+
+</robot>
+

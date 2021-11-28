@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: null_damping
+Description: Description of null_damping
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lnull_damping -lcvxgen_null
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/federico/benzi_ws/src/build/devel
+
+Name: redundancy_solver
+Description: Description of redundancy_solver
+Version: 0.0.0
+Cflags: -I/home/federico/benzi_ws/src/build/devel/include -I/home/federico/benzi_ws/src/redundancy_solver/include -I/home/federico/benzi_ws/src/redundancy_solver/lib
+Libs: -L${prefix}/lib -lredundancy_solver -lcvxgen_solver -lsolver_simulator
+Requires: message_runtime

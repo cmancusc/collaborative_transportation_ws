@@ -1,0 +1,2 @@
+set(redundancy_solver_MESSAGE_FILES "")
+set(redundancy_solver_SERVICE_FILES "/home/federico/benzi_ws/src/redundancy_solver/srv/GetGoals.srv;/home/federico/benzi_ws/src/redundancy_solver/srv/SimulateGoals.srv;/home/federico/benzi_ws/src/redundancy_solver/srv/ChangeSafetyDistance.srv;/home/federico/benzi_ws/src/redundancy_solver/srv/GetGoalsJoints.srv;/home/federico/benzi_ws/src/redundancy_solver/srv/SimulateGoalsJoints.srv")
